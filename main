@@ -1,0 +1,111 @@
+use std::io;
+
+//const CEL_FREEZE_POINT: f64 = 0.0;
+const FAR_FREEZE_POINT: f64 = 32.0;
+const KEL_FREEZE_POINT: f64 = 273.15;
+const CELTOFAR_CONVERSION: f64 = 9.0 / 5.0;
+const FARTOCEL_CONVERSION: f64 = 5.0/ 9.0;
+
+fn main() {
+
+    loop {
+    
+        println!("Hello, welcome dear buddy to convertor 101");
+        
+        println!("Press\n1 for Cel;\n2 for Far;\n3 for Kel;\n4 for exit");
+        
+        let mut input = String::new();
+        
+        io::stdin()
+            .read_line(&mut input)
+            .expect("sorry, error. Please pick again");
+            
+        //convert str to int
+        let input:u32 = input.trim().parse().unwrap();
+    
+        
+        //if/else
+        
+        match input {
+            
+            1 => {
+                println!("Input measurement: ");
+            
+                let mut input_celsius = String::new();
+                
+                io::stdin()
+                    .read_line(&mut input_celsius)
+                    .expect("Please input correct value");
+                    
+                let input_celsius:f64 = input_celsius.trim().parse().expect("it is not a number");
+                
+                let celsius_to_faren: f64 = input_celsius * CELTOFAR_CONVERSION + FAR_FREEZE_POINT;
+                
+                let celsius_to_kel: f64 = input_celsius + KEL_FREEZE_POINT;
+                
+                println!("Measurement in Farenheit: {}\nMeasurement in Kelvin: {}", celsius_to_faren, celsius_to_kel)
+                    
+            },
+            
+                
+            2 => {
+        
+                println!("input measurement: ");
+                
+                let mut input_far = String::new();
+                
+                io::stdin()
+                    .read_line(&mut input_far)
+                    .expect("Please input correct value boss");
+                    
+                    let input_far: f64 = input_far.trim().parse().expect("It's not a number");
+                    
+                    let far_to_celsius: f64 = input_far - FAR_FREEZE_POINT * FARTOCEL_CONVERSION;
+                    
+                    let far_to_kelvin: f64 = far_to_celsius + KEL_FREEZE_POINT;
+                    
+                    println!("Measurement in Celsius: {far_to_celsius}\nMeasurement in Kelvin: {far_to_kelvin}");
+                
+                    
+            },    
+               
+            
+            3 => {
+        
+                println!("input measurement: ");
+        
+                let mut input_kel = String::new();
+                
+                io::stdin()
+                    .read_line(&mut input_kel)
+                    .expect("Please be serious");
+                    
+                    let input_kel: f64 = input_kel.trim().parse().expect("Not a number");
+                    
+                    let kel_to_celsius: f64 = input_kel - KEL_FREEZE_POINT;
+                    
+                    let kel_to_far: f64 = kel_to_celsius * CELTOFAR_CONVERSION + FAR_FREEZE_POINT;
+                    
+                    println!("Measurement in Celsius: {kel_to_celsius}\nMeasurement in Farenheit{kel_to_far}");
+            
+            
+            },
+        
+            4 =>  {
+        
+                println!("Thank you for visiting Convertor 101.\nBe sure to check out our app for more information on the best scale convertor around!");
+                
+                break;
+            },
+        
+            _ => {
+                println!("Please input 1 to 4");
+                continue;
+            }
+        }
+        
+    }
+        
+}
+
+ 
